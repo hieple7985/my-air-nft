@@ -1,0 +1,48 @@
+{
+  "name": "myairnft.com",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "lerna exec -- yarn run --parallel start",
+    "build": "lerna exec -- yarn run --parallel build",
+    "lint": "eslint '**/*.{js,jsx}'",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier": "prettier -l '**/*.{js,jsx,ts,tsx,json,md}'",
+    "test": "lerna run --parallel test",
+    "postinstall": "lerna bootstrap"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.7.0",
+    "@typescript-eslint/parser": "^4.7.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.13.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-config-sinon": "^4.0.0",
+    "eslint-config-standard": "^16.0.1",
+    "eslint-import-resolver-webpack": "^0.13.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.1.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-security": "^1.4.0",
+    "eslint-plugin-standard": "^4.1.0",
+    "husky": "^4.3.0",
+    "lerna": "^3.22.1",
+    "lint-staged": "^10.5.1",
+    "prettier": "^2.1.2"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint"
+    ],
+    "*.{js,jsx,ts,tsx,json,md}": [
+      "prettier --check"
+    ],
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}

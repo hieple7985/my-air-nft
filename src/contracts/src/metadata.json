@@ -1,0 +1,11 @@
+{
+  "name": "my air nft",
+  "description": "Deploy your NFT Airdrop in mimutes",
+  "version": "beta",
+  "license": {
+    "name": "MIT"
+  },
+  "authors": ["waylad <waylad42@gmail.com>"],
+  "homepage": "https://myairnft.com",
+  "interfaces": ["TZIP-012", "TZIP-016"]
+}

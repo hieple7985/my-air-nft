@@ -1,0 +1,1 @@
+export default "KT1WWaPTDrJuPPo3KzYAFPruoRLetxRWYjFA";
