@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro'
 import { textColor } from 'styles'
 
-export const CreateGrid = styled.div`
+export const MyNftGrid = styled.div`
   display: grid;
   grid-template-columns: calc(50vw - 430px) 800px calc(50vw - 430px);
   grid-gap: 30px;
@@ -11,7 +11,7 @@ export const CreateGrid = styled.div`
   }
 `
 
-export const CreateBgLeft = styled.div`
+export const MyNftBgLeft = styled.div`
   @media (max-width: 700px) {
     > img {
       display: none;
@@ -19,7 +19,7 @@ export const CreateBgLeft = styled.div`
   }
 `
 
-export const CreateBgRight = styled.div`
+export const MyNftBgRight = styled.div`
   @media (max-width: 700px) {
     > img {
       display: none;
@@ -27,7 +27,7 @@ export const CreateBgRight = styled.div`
   }
 `
 
-export const CreateStyled = styled.div`
+export const MyNftStyled = styled.div`
   > a > img {
     margin: 20px 0;
   }

@@ -20,7 +20,7 @@ export const Home = () => {
   return (
     <>
       {ready ? (
-        <Navigate to="/originate" replace />
+        <Navigate to="/my-nft" replace />
       ) : (
         <HomeView
           loading={loading}

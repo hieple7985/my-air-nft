@@ -50,6 +50,7 @@
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
     "reflect-metadata": "^0.1.13",
+    "speakingurl": "^14.0.1",
     "styled-components": "^5.3.1",
     "web-vitals": "^2.1.0"
   },

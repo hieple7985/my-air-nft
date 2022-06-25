@@ -1,10 +1,12 @@
+import { Input } from 'app/App.components/Input/Input.view'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 // prettier-ignore
-import { MintBgLeft, MintBgRight, MintGrid, MintNftGrid, MintStyled } from './Mint.style'
+import { MintBgLeft, MintBgRight, MintGrid, MintStyled } from './Mint.style'
 
 type MintViewProps = {
-  mintCallback: () => void
+  mintCallback: (city: string) => void
   connectCallback: () => void
   loading: boolean
   accountPkh?: string
@@ -13,38 +15,39 @@ type MintViewProps = {
 }
 
 export const MintView = ({ mintCallback, metadata, connectCallback, loading, accountPkh, address }: MintViewProps) => {
+  const [city, setCity] = useState('')
+
   return (
     <MintGrid>
-      <MintBgLeft>
-        <img alt="bg-left" src="/bg2-left.svg" />
-      </MintBgLeft>
+      <MintBgLeft />
       <MintStyled>
         <Link to="/">
           <img alt="logo" src="/logo.svg" />
         </Link>
-        <div>Congratulation, you can participate in this airdrop and mint the NFT below!</div>
+        <div>
+          Enter the name of your city and mint a new NFT that will be sent to your wallet for free. The NFT will contain the name of your
+          city in its metadata and update its illustration automatically based on pollution levels in that city.
+        </div>
 
-        <MintNftGrid>
-          {metadata ? (
-            <img alt="nft" src={`https://cloudflare-ipfs.com/ipfs/${metadata.displayUri.replace('ipfs://', '')}`} />
-          ) : (
-            <div>Loading...</div>
-          )}
-          <div>
-            <b>{metadata ? metadata.name : 'Loading...'}</b>
-            <div>{metadata ? metadata.description : 'Loading...'}</div>
-          </div>
-        </MintNftGrid>
+        <label htmlFor="name">Your city</label>
+        <Input
+          name="name"
+          placeholder=""
+          type="text"
+          onChange={(e: any) => setCity(e.target.value)}
+          value={city}
+          onBlur={() => {}}
+          inputStatus={undefined}
+          errorMessage={undefined}
+        />
 
         {accountPkh ? (
-          <img onClick={() => mintCallback()} alt="button-mint" src="/button-mint.svg" />
+          <img onClick={() => mintCallback(city)} alt="button-mint" src="/button-mint.svg" />
         ) : (
           <img onClick={() => connectCallback()} alt="button-connect" src="/button-connect.svg" />
         )}
       </MintStyled>
-      <MintBgRight>
-        <img alt="bg-right" src="/bg2-right.svg" />
-      </MintBgRight>
+      <MintBgRight />
     </MintGrid>
   )
 }
