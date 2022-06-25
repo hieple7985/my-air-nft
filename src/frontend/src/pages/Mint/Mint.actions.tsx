@@ -48,7 +48,7 @@ export const fetchMetadata = (address: string) => async (dispatch: any, getState
 export const MINT_REQUEST = 'MINT_REQUEST'
 export const MINT_RESULT = 'MINT_RESULT'
 export const MINT_ERROR = 'MINT_ERROR'
-export const mint = (address: string) => async (dispatch: any, getState: any) => {
+export const mint = (city: string) => async (dispatch: any, getState: any) => {
   const state: State = getState()
 
   if (!state.wallet.tezos) {
@@ -66,24 +66,47 @@ export const mint = (address: string) => async (dispatch: any, getState: any) =>
     return
   }
 
-  if (!address) {
-    dispatch(showToaster(ERROR, 'Contract not found', 'Please return to homepage'))
-    return
-  }
-
   try {
     dispatch({
       type: MINT_REQUEST,
     })
 
-    const contract = await state.wallet.tezos?.wallet.at(address)
-    const token_id = 0
-    const owner = state.wallet.accountPkh
-    const mintTransaction = await contract.methods.mint_token([{ owner, token_id }]).send()
-    dispatch(showToaster(SUCCESS, 'Creating token...', 'Please wait 30s'))
+    const contract = await state.wallet.tezos?.wallet.at('KT1Mdqsdp36cSdag1qy9sGFU2PFuzM7PRn68')
+    const token_id = Math.floor(Math.random() * 10000)
 
-    const mintDone = await mintTransaction.confirmation()
-    console.log('done', mintDone)
+    const name = 'My Air NFT'
+    const token_info = MichelsonMap.fromLiteral({
+      name: Buffer.from(name).toString('hex'),
+      symbol: Buffer.from(name).toString('hex'),
+      description: Buffer.from(city).toString('hex'),
+      decimals: Buffer.from('0').toString('hex'),
+      thumbnailUri: Buffer.from('https://myairnft.com/logo512.png').toString('hex'),
+    })
+    // const createTransaction = await contract.methods.create_token(token_id, token_info, token_id).send()
+    // dispatch(showToaster(SUCCESS, 'Creating token...', 'Please wait 30s'))
+    // const createDone = await createTransaction.confirmation()
+    // console.log('done', createDone)
+    // const owner = state.wallet.accountPkh
+    // const mintTransaction = await contract.methods.mint_token([{ owner, token_id }]).send()
+    // dispatch(showToaster(SUCCESS, 'Minting NFT...', 'Please wait 30s'))
+    // const mintDone = await mintTransaction.confirmation()
+    // console.log('done', mintDone)
+
+    const owner = state.wallet.accountPkh
+    const batch = state.wallet.tezos.wallet
+      .batch()
+      .withContractCall(contract.methods.create_token(token_id, token_info, token_id))
+      .withContractCall(contract.methods.mint_token([{ owner, token_id }]))
+    const batchOp = await batch.send()
+    const mintDone = await batchOp.confirmation()
+
+    const localStorageTokens = localStorage.tokens
+    if (localStorageTokens) {
+      let storedTokens = JSON.parse(localStorageTokens)
+      localStorage.tokens = JSON.stringify([...storedTokens, token_id])
+    } else {
+      localStorage.tokens = JSON.stringify([token_id])
+    }
 
     dispatch(showToaster(SUCCESS, 'NFT sent to your wallet', 'Enjoy!'))
 

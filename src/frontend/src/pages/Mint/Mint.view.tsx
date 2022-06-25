@@ -1,6 +1,7 @@
 import { Input } from 'app/App.components/Input/Input.view'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import getSlug from 'speakingurl'
 
 // prettier-ignore
 import { MintBgLeft, MintBgRight, MintGrid, MintStyled } from './Mint.style'
@@ -10,11 +11,9 @@ type MintViewProps = {
   connectCallback: () => void
   loading: boolean
   accountPkh?: string
-  address?: string
-  metadata?: any
 }
 
-export const MintView = ({ mintCallback, metadata, connectCallback, loading, accountPkh, address }: MintViewProps) => {
+export const MintView = ({ mintCallback, connectCallback, loading, accountPkh }: MintViewProps) => {
   const [city, setCity] = useState('')
 
   return (
@@ -41,10 +40,16 @@ export const MintView = ({ mintCallback, metadata, connectCallback, loading, acc
           errorMessage={undefined}
         />
 
-        {accountPkh ? (
-          <img onClick={() => mintCallback(city)} alt="button-mint" src="/button-mint.svg" />
+        {loading ? (
+          <div>Loading...</div>
         ) : (
-          <img onClick={() => connectCallback()} alt="button-connect" src="/button-connect.svg" />
+          <>
+            {accountPkh ? (
+              <img onClick={() => mintCallback(getSlug(city))} alt="button-mint" src="/button-mint.svg" />
+            ) : (
+              <img onClick={() => connectCallback()} alt="button-connect" src="/button-connect.svg" />
+            )}
+          </>
         )}
       </MintStyled>
       <MintBgRight />

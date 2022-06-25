@@ -65,3 +65,29 @@ export const UploaderLabel = styled.label`
   align-items: center;
   justify-content: center;
 `
+
+export const MyNftTokens = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  text-align: center;
+
+  > a {
+    cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid #bdbdb8;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  p {
+    text-transform: capitalize;
+  }
+
+  pre {
+    font-size: 20px;
+    font-weight: bold;
+  }
+`

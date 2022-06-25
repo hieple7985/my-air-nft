@@ -1,16 +1,15 @@
 import { Link } from 'react-router-dom'
 
 // prettier-ignore
-import { MyNftBgLeft, MyNftBgRight, MyNftGrid, MyNftStyled } from './MyNft.style'
+import { MyNftBgLeft, MyNftBgRight, MyNftGrid, MyNftStyled, MyNftTokens } from './MyNft.style'
 
 type MyNftViewProps = {
-  createCallback: (name: string, description: string, image: string) => void
   loading: boolean
   accountPkh?: string
-  address?: string
+  tokens: any
 }
 
-export const MyNftView = ({ address, createCallback, loading, accountPkh }: MyNftViewProps) => {
+export const MyNftView = ({ loading, accountPkh, tokens }: MyNftViewProps) => {
   return (
     <MyNftGrid>
       <MyNftBgLeft />
@@ -24,7 +23,15 @@ export const MyNftView = ({ address, createCallback, loading, accountPkh }: MyNf
           can click on them to see more imformation from aqicn.org. Click Mint New NFT if do not have any Air NFT yet.{' '}
         </div>
 
-        <div>No NFT in your gallery yet...</div>
+        <MyNftTokens>
+          {tokens.map((token: any) => (
+            <a key={token.city} href={`https://aqicn.org/city/${token.city}/`} target="_blank" rel="noreferrer">
+              <p>{token.city}</p>
+              <pre>{token.pollution}</pre>
+              <img alt="pollution" src={`/${token.level}.png`} />
+            </a>
+          ))}
+        </MyNftTokens>
 
         <Link to="/mint">
           <img alt="button-mint" src="/button-mint.svg" />
