@@ -46,17 +46,12 @@ const deploy = async () => {
     console.log(`List all contract methods: ${Object.keys(contract.methods)}\n`)
     console.log(`Signature of 'create_token': ${JSON.stringify(contract.methods.create_token().getSignature(), null, 2)}`)
     const token_id = 0
-    const name = 'TEST'
-    const description = 'TT'
-    const image = 'ipfs://'
-    const creator = 'Me'
+    const name = 'My Air NFT'
+    const city = 'paris'
     const token_info = MichelsonMap.fromLiteral({
       name: Buffer.from(name).toString('hex'),
       symbol: Buffer.from(name).toString('hex'),
-      description: Buffer.from(description).toString('hex'),
-      artifactUri: Buffer.from(image).toString('hex'),
-      displayUri: Buffer.from(image).toString('hex'),
-      creators: Buffer.from(creator).toString('hex'),
+      description: Buffer.from(city).toString('hex'),
       decimals: Buffer.from('0').toString('hex'),
       thumbnailUri: Buffer.from('https://myairnft.com/logo512.png').toString('hex'),
     })
