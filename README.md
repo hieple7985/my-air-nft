@@ -2,7 +2,7 @@
 
 ## Live Demo: https://myairnft.com
 
-## Demo Video: Currently uploading, coming very soon!
+## Demo Video: https://youtu.be/7MgaTiYNr_s
 
 # About My Air NFT
 
@@ -65,7 +65,7 @@ make test
 make deploy
 ```
 
-Note: We have used [Pierre-Emmanuel Wulfman’s FA2 implementation](<https://github.com/pewulfman/Tezos-TZIP-implementation/tree/main/TZIP-12%20(FA2)>) and customized it to generate airdrops. However, this implementation lack any mean of deployment so we have coded our own deployment script in `Makefile`.
+Note: We have used [Pierre-Emmanuel Wulfman’s FA2 implementation](<https://github.com/pewulfman/Tezos-TZIP-implementation/tree/main/TZIP-12%20(FA2)>) and customized it to allow public mints. However, this implementation lacks any mean of deployment so we have coded our own deployment script in `Makefile`.
 
 ## Frontend
 
