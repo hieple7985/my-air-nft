@@ -6,7 +6,6 @@
 **/dist
 **/build
 **/downloads
-**/screenshots
 **/yarn-error.log
 **/error.log
 **/.webpack
